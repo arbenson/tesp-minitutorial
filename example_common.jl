@@ -3,7 +3,7 @@ using MAT
 
 """ Simulate a first-order Markov chain with transition probabilities given by
 the column stochastic matrix P. """
-function sim_FOMC(P::Array{Float64,2}, start::Int64, niter::Int64=1_000_000)
+function sim_FOMC(P::Array{Float64,2}, start::Int64, niter::Int64=10_000_000)
     n = size(P, 1)
     counts = zeros(Int64, n)
     states = [start]
@@ -18,7 +18,7 @@ end
 
 """ Simulate a second-order Markov chain with transition probabilities given by
 the transition probability tensor P. """
-function sim_SOMC(P::Array{Float64,3}, start::NTuple{2,Int64}, niter::Int64=1_000_000)
+function sim_SOMC(P::Array{Float64,3}, start::NTuple{2,Int64}, niter::Int64=10_000_000)
     n = size(P, 1)
     counts = zeros(Int64, n)
     states = [start[1], start[2]]
@@ -37,7 +37,7 @@ transition probabilities given by the transition probability tensor P. The
 column vector zerocol specifies what transitions to make in the case of an
 undefined transition. """
 function sim_SOSRW(P::Array{Float64,3}, start::Int64, zerocol::Vector{Float64},
-                   super_spacey::Bool=false, niter::Int64=1_000_000)
+                   super_spacey::Bool=false, niter::Int64=10_000_000)
     if !super_spacey; assert(sum(zerocol) ≈ 1); end
     n = size(P, 1)
     counts = zeros(Int64, n)
