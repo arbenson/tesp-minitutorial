@@ -6,4 +6,4 @@ This respository contains notebooks for the two examples of random walks, non-ba
 - `7-node-line-walks.ipynb`
 
 
-
+See http://www.cs.cornell.edu/~arb/tesp for more information on the minitutorial.
