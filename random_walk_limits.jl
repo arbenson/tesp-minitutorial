@@ -114,6 +114,50 @@ symmat = x->x+x'
 d = vec(sum(symmat(sparse(ei,ej,1,50,50)),1))
 scatter(d/sum(d), 1:50,  label="", framestyle=:none, size=(75,300))
 savefig("rw-stationary-dist.pdf")
+
+## Show what happens with a VRRW (the classic)
+using StatsBase
+srand(1)
+pyplot(size=(400,300))
+function vrrw_on_graph(ei, ej, xy, start, nstep)
+  eirw = [ei; ej]
+  ejrw = [ej; ei]
+  N = maximum(ei)
+  X = start
+  # random walk step
+  ## Simulate the random walk and show the distribution
+
+  l = @layout([a{0.75w} b])
+  x = ones(N)
+  ps = plot(graphplot(ei, ej, x =xy[1,:], y=xy[2,:],
+    markercolor=:black, markerstrokecolor=:white,
+    markersize=4, linecolor=2, linealpha=0.8, linewidth=0.7,
+    axis_buffer=0.02, background=:white, framestyle=:none),
+    scatter(x/N, 1:50, label="", framestyle=:none), layout=l)
+  p1 = ps[1]
+  p2 = ps[2]
+  p1a = scatter!(p1, [xy[1,X]],[xy[2,X]],markersize=4, color=1)
+  p1b = scatter!(p1, [xy[1,X]],[xy[2,X]],markersize=8, color=:orange)
+  anim = @animate for i=1:nstep
+
+    neighs = ejrw[eirw .== X]
+    weights = x[neights]
+
+
+    Xn = neighs[sample(Weights(weights))]
+    x[Xn] += 1
+    ps[4] = [xy[1,X]],[xy[2,X]]
+    ps[5] = [xy[1,Xn]],[xy[2,Xn]]
+    ps[3] = x/(N+i),collect(1:50)
+    X = Xn
+  end
+  return anim
+end
+
+anim = rw_on_graph(ei, ej, xy, 1, 500)
+gif(anim, "vrrw-with-dist-on-gnr.gif", fps=25)
+
+
 ##
 srand(1)
 pyplot(size=(400,300))

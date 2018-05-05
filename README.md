@@ -1,4 +1,4 @@
-### Jupyter notebooks accompanying the slides of the "Tensor Eigenvectors and Stochastic Processes" (TESP) mini-tutorial at SIAM ALA 2018.
+### Julia code and Jupyter notebooks accompanying the Tensor Eigenvectors and Stochastic Processes (TESP) mini-tutorial at SIAM ALA 2018 in Hong Kong.
 
 See http://www.cs.cornell.edu/~arb/tesp for more information on the minitutorial.
 
