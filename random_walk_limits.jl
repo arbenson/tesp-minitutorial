@@ -141,10 +141,10 @@ function vrrw_on_graph(ei, ej, xy, start, nstep)
   anim = @animate for i=1:nstep
 
     neighs = ejrw[eirw .== X]
-    weights = x[neights]
-
+    weights = x[neighs]
 
     Xn = neighs[sample(Weights(weights))]
+
     x[Xn] += 1
     ps[4] = [xy[1,X]],[xy[2,X]]
     ps[5] = [xy[1,Xn]],[xy[2,Xn]]
@@ -154,7 +154,7 @@ function vrrw_on_graph(ei, ej, xy, start, nstep)
   return anim
 end
 
-anim = rw_on_graph(ei, ej, xy, 1, 500)
+anim = vrrw_on_graph(ei, ej, xy, 1, 500)
 gif(anim, "vrrw-with-dist-on-gnr.gif", fps=25)
 
 
